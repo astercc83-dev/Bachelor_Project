@@ -1,5 +1,6 @@
 import nidaqmx  # To read from the PXI harware
 from nidaqmx.constants import AcquisitionType
+from nidaqmx import constants
 import numpy as np # To create and handel the data arrays
 from multiprocessing import shared_memory # To create the shared buffer between processes
 
@@ -12,7 +13,7 @@ BUFFER_SIZE: how many samples in each buffer. 1000 Sample at
 
 CHANNEL = "PXI1Slot3/ai0"
 SAMPLE_RATE = 1_000_000
-BUFFER_SIZE = 1_000
+BUFFER_SIZE = constants.READ_ALL_AVAILABLE
 
 
 """ Creating the Shared Memory:(Shared Memory) is a special area in 
