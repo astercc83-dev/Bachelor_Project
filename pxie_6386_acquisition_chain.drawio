@@ -1,0 +1,76 @@
+<mxfile host="app.diagrams.net" modified="2026-07-09T00:00:00.000Z" agent="Claude" version="24.0.0" type="device">
+  <diagram id="pxie6386chain" name="PXIe-6386 acquisition chain">
+    <mxGraphModel dx="900" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <mxCell id="n1" value="&lt;b&gt;Chip signal&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;example: 0.5 V on one channel&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fillColor=#F1EFE8;strokeColor=#5F5E5A;fontColor=#2C2C2A;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="220" y="40" width="240" height="54" as="geometry" />
+        </mxCell>
+
+        <mxCell id="n2" value="&lt;b&gt;Differential input&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;AI+ − AI− · cancels noise&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fillColor=#E1F5EE;strokeColor=#0F6E56;fontColor=#04342C;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="220" y="122" width="240" height="54" as="geometry" />
+        </mxCell>
+
+        <mxCell id="n3" value="&lt;b&gt;Simultaneous sample &amp;amp; hold&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;one ADC per channel · zero skew&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fillColor=#E1F5EE;strokeColor=#0F6E56;fontColor=#04342C;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="220" y="204" width="240" height="54" as="geometry" />
+        </mxCell>
+
+        <mxCell id="nclk" value="&lt;b&gt;Sample clock&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;100 MHz · 14.29 MS/s max&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fillColor=#F1EFE8;strokeColor=#5F5E5A;fontColor=#2C2C2A;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="20" y="286" width="150" height="54" as="geometry" />
+        </mxCell>
+
+        <mxCell id="n4" value="&lt;b&gt;16-bit ADC&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;65,536 steps · 30.5 µV/step&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fillColor=#E1F5EE;strokeColor=#0F6E56;fontColor=#04342C;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="220" y="286" width="240" height="54" as="geometry" />
+        </mxCell>
+
+        <mxCell id="n5" value="&lt;b&gt;Onboard FIFO&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;~12,287 samples · shock absorber&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fillColor=#EEEDFE;strokeColor=#534AB7;fontColor=#26215C;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="220" y="368" width="240" height="54" as="geometry" />
+        </mxCell>
+
+        <mxCell id="loss1" value="&lt;b&gt;data loss: FIFO overflow&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;bus / hardware limit&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=25;fillColor=#FCEBEB;strokeColor=#A32D2D;fontColor=#501313;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="500" y="371" width="170" height="48" as="geometry" />
+        </mxCell>
+
+        <mxCell id="n6" value="&lt;b&gt;DMA engine&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;moves data · no CPU · 8 channels&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fillColor=#E1F5EE;strokeColor=#0F6E56;fontColor=#04342C;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="220" y="448" width="240" height="54" as="geometry" />
+        </mxCell>
+
+        <mxCell id="n7" value="&lt;b&gt;PXIe bus ×1&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;250 MB/s — the bottleneck&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fillColor=#FAEEDA;strokeColor=#854F0B;fontColor=#412402;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="220" y="528" width="240" height="54" as="geometry" />
+        </mxCell>
+
+        <mxCell id="n8" value="&lt;b&gt;Host buffer (RAM)&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;~1,000,000 samples ≈ 1 s&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fillColor=#EEEDFE;strokeColor=#534AB7;fontColor=#26215C;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="220" y="608" width="240" height="54" as="geometry" />
+        </mxCell>
+
+        <mxCell id="loss2" value="&lt;b&gt;data loss: host overflow&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;error -200279 · software / OS limit&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=25;fillColor=#FCEBEB;strokeColor=#A32D2D;fontColor=#501313;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="500" y="611" width="170" height="48" as="geometry" />
+        </mxCell>
+
+        <mxCell id="n9" value="&lt;b&gt;Python task.read()&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;back to volts: 0.49998&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fillColor=#F1EFE8;strokeColor=#5F5E5A;fontColor=#2C2C2A;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="220" y="688" width="240" height="54" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=classic;strokeColor=#5F5E5A;strokeWidth=1.5;" edge="1" parent="1" source="n1" target="n2"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=classic;strokeColor=#5F5E5A;strokeWidth=1.5;" edge="1" parent="1" source="n2" target="n3"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=classic;strokeColor=#5F5E5A;strokeWidth=1.5;" edge="1" parent="1" source="n3" target="n4"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="eclk" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=classic;strokeColor=#5F5E5A;strokeWidth=1.5;" edge="1" parent="1" source="nclk" target="n4"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=classic;strokeColor=#5F5E5A;strokeWidth=1.5;" edge="1" parent="1" source="n4" target="n5"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=classic;strokeColor=#5F5E5A;strokeWidth=1.5;" edge="1" parent="1" source="n5" target="n6"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=classic;strokeColor=#5F5E5A;strokeWidth=1.5;" edge="1" parent="1" source="n6" target="n7"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=classic;strokeColor=#5F5E5A;strokeWidth=1.5;" edge="1" parent="1" source="n7" target="n8"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=classic;strokeColor=#5F5E5A;strokeWidth=1.5;" edge="1" parent="1" source="n8" target="n9"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <mxCell id="l1" style="endArrow=none;dashed=1;html=1;strokeColor=#A32D2D;" edge="1" parent="1" source="n5" target="loss1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="l2" style="endArrow=none;dashed=1;html=1;strokeColor=#A32D2D;" edge="1" parent="1" source="n8" target="loss2"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <mxCell id="legend" value="&lt;b&gt;Legend&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#0F6E56&quot;&gt;■&lt;/font&gt; on-card signal path&amp;nbsp;&amp;nbsp; &lt;font color=&quot;#534AB7&quot;&gt;■&lt;/font&gt; buffers — data-loss points&amp;nbsp;&amp;nbsp; &lt;font color=&quot;#854F0B&quot;&gt;■&lt;/font&gt; bus — the bottleneck" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=none;strokeColor=#B4B2A9;fontColor=#2C2C2A;fontSize=11;align=left;spacingLeft=8;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="20" y="768" width="650" height="50" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
